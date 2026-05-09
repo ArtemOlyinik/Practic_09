@@ -4,7 +4,10 @@ import ua.store.dao.ConnectionPool;
 import ua.store.exception.EntityNotFoundException;
 import ua.store.model.Category;
 import ua.store.model.Product;
+import ua.store.model.User;
 import ua.store.service.StoreService;
+import ua.store.validation.UserValidationService;
+import ua.store.validation.ValidationResult;
 
 import java.util.List;
 
@@ -85,6 +88,60 @@ public class Main {
                 .categoryId(1)
                 .build();
         System.out.println("Created with Builder: " + newProduct);
+
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("=== VALIDATION DEMO (Practica 09) ===");
+        System.out.println("Patterns: Chain of Responsibility + Builder + Singleton\n");
+
+        UserValidationService validationService = new UserValidationService();
+
+        System.out.println("--- 11. Valid User ---");
+        User validUser = User.builder()
+                .login("johndoe")
+                .email("john.doe@gmail.com")
+                .password("Password123!")
+                .phone("+380991234567")
+                .build();
+        ValidationResult validResult = validationService.validate(validUser);
+        System.out.println("User: " + validUser.getLogin());
+        if (validResult.hasErrors()) {
+            System.out.println("Errors: " + validResult.getMessages());
+        } else {
+            System.out.println("Validation: PASSED - No errors");
+        }
+
+        System.out.println("\n--- 12. Invalid User (Multiple Errors) ---");
+        User invalidUser = User.builder()
+                .login("моє_ім'я")
+                .email("моя%пошта@gmailcom")
+                .password("weak")
+                .phone("abc123")
+                .build();
+        ValidationResult invalidResult = validationService.validate(invalidUser);
+        System.out.println("User: " + invalidUser.getLogin());
+        System.out.println("Email: " + invalidUser.getEmail());
+
+        if (invalidResult.hasErrors()) {
+            System.out.println("\nErrors found: " + invalidResult.getErrorCount());
+            System.out.println("\nValidation hints:");
+            invalidResult.getMessages().forEach(msg -> System.out.println("  - " + msg));
+        }
+
+        System.out.println("\n--- 13. Individual Field Validation ---");
+        System.out.println("\nLogin 'ab': " + validationService.validateLogin("ab").getMessages());
+        System.out.println("Email 'test@': " + validationService.validateEmail("test@").getMessages());
+        System.out.println("Password 'short': " + validationService.validatePassword("short").getMessages());
+        System.out.println("Phone '123': " + validationService.validatePhone("123").getMessages());
+
+        System.out.println("\n--- 14. Builder Pattern with ValidationMessages ---");
+        User userWithMessages = User.builder()
+                .login("user123")
+                .email("user@example.com")
+                .password("SecurePass1!")
+                .phone("+380501234567")
+                .build();
+        System.out.println("User with messages field: " + userWithMessages);
+        System.out.println("Validation messages: " + userWithMessages.getValidationMessages());
 
         System.out.println("\n=== Demo Complete ===");
         System.out.println("Available connections: " + ConnectionPool.getInstance().getAvailableCount());

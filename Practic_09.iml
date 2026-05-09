@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" level="project" name="sqlite-jdbc-3.45.1.0">
+      <attributes>
+        <attribute name="binaryConfiguration" value="false"/>
+        <attribute name="sourceAttachment" value=""/>
+      </attributes>
+      <serialized-file url="jar://$MODULE_DIR$/lib/sqlite-jdbc-3.45.1.0.jar!/" />
+    </orderEntry>
+    <orderEntry type="library" level="project" name="slf4j-api-2.0.9">
+      <attributes>
+        <attribute name="binaryConfiguration" value="false"/>
+        <attribute name="sourceAttachment" value=""/>
+      </attributes>
+      <serialized-file url="jar://$MODULE_DIR$/lib/slf4j-api-2.0.9.jar!/" />
+    </orderEntry>
+    <orderEntry type="library" level="project" name="slf4j-simple-2.0.9">
+      <attributes>
+        <attribute name="binaryConfiguration" value="false"/>
+        <attribute name="sourceAttachment" value=""/>
+      </attributes>
+      <serialized-file url="jar://$MODULE_DIR$/lib/slf4j-simple-2.0.9.jar!/" />
+    </orderEntry>
+  </component>
+</module>
