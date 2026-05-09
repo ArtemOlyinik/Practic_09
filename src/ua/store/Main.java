@@ -21,7 +21,7 @@ public class Main {
         service.addCategory("Laptops", "Portable computers for work and gaming");
         service.addCategory("Smartphones", "Mobile phones and accessories");
 
-        System.out.println("\n--- 2. All Categories ---");
+        System.out.println("\n--- 2. All Categories ---") ;
         List<Category> categories = service.getAllCategories();
         categories.forEach(System.out::println);
 
